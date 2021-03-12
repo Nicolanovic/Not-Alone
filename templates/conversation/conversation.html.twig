@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConversationController!{% endblock %}
+
+{% block body %}
+
+{{ messages|json_encode() }}
+    <h1>Conversation avec {{ otherParticipant }}</h1>
+
+    {% for message in messages %}
+
+        <div>
+            <p>
+                {% if message.mine %}
+                Moi : 
+                {% else %}
+                {{ otherParticipant }} : 
+                {% endif %}
+                {{ message.content }}
+            </p>
+        </div>
+
+    {% else %}
+
+    {% endfor %}
+
+    {{ form_start(messageForm) }}
+        {{ form_widget(messageForm) }}
+        <button type="submit">Envoyer</button>
+    {{ form_end(messageForm) }}
+
+{% endblock %}

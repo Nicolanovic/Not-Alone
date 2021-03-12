@@ -77,4 +77,20 @@ class Message
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMine()
+    {
+        return $this->mine;
+    }
+
+    /**
+     * @param mixed $mine
+     */
+    public function setMine($mine): void
+    {
+        $this->mine = $mine;
+    }
 }
