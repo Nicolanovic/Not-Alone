@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09f6cba43b6e7b4b1c2d11141e2729b1",
+    "content-hash": "e7aa2e4ca757324c894974696c88dc31",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3066,20 +3066,6 @@
             "support": {
                 "source": "https://github.com/symfony/form/tree/v5.2.4"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-03-04T15:41:09+00:00"
         },
         {
@@ -3696,20 +3682,6 @@
                 "issues": "https://github.com/symfony/mercure/issues",
                 "source": "https://github.com/symfony/mercure/tree/v0.4.1"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-11-26T20:15:59+00:00"
         },
         {
@@ -3778,20 +3750,6 @@
                 "issues": "https://github.com/symfony/mercure-bundle/issues",
                 "source": "https://github.com/symfony/mercure-bundle/tree/v0.2.6"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-11-26T20:52:26+00:00"
         },
         {
@@ -6771,6 +6729,5 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "platform-dev": []
 }
