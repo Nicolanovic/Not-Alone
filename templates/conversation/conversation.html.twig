@@ -3,30 +3,45 @@
 {% block title %}Hello ConversationController!{% endblock %}
 
 {% block body %}
+    
+    <div class="row h1 messages">
+        <a href="{{ path('getConversations') }}">
+            <img src="{{ asset('assets/img/back.svg') }}" />
+        </a>
 
-{{ messages|json_encode() }}
-    <h1>Conversation avec {{ otherParticipant }}</h1>
+        <img src="{{ asset('uploads/avatars/' ~ otherParticipant.avatarFilename) }}" />
+        
+        <h1>{{ otherParticipant.username }}</h1>
+    </div>
 
-    {% for message in messages %}
+    <div class="main-body message-body">
+        {% for message in messages %}
 
-        <div>
-            <p>
-                {% if message.mine %}
-                Moi : 
-                {% else %}
-                {{ otherParticipant }} : 
-                {% endif %}
-                {{ message.content }}
-            </p>
-        </div>
+            <div class="message-container">
 
-    {% else %}
+            {% if message.mine %}
+                <div class="message mine">
+            {% else %}
+                <img src="{{ asset('uploads/avatars/' ~ otherParticipant.avatarFilename) }}" />
+                <div class="message other">
+            {% endif %}
+                <p>
+                    {{ message.content }}
+                </p>
+            </div>
 
-    {% endfor %}
+            </div>
 
+        {% else %}
+
+        {% endfor %}
+    </div>
+
+    <header class="message-form">
     {{ form_start(messageForm) }}
         {{ form_widget(messageForm) }}
-        <button type="submit">Envoyer</button>
+        <button type="submit"><img src="{{ asset('assets/img/send.svg') }}" /></button>
     {{ form_end(messageForm) }}
+    </header>
 
 {% endblock %}

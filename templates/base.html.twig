@@ -6,6 +6,8 @@
         
         {% block stylesheets %}
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
         {% endblock %}
 
         {% block javascripts %}{% endblock %}
@@ -14,9 +16,45 @@
         <main class="container">
             {% block body %}{% endblock %}
         </main>
+        {% set route = app.request.get('_route') %}
+        {% if route != 'app_login' and route != 'user_registration' and route != 'showConversation' %}
+        <header>
+            <nav>
+                {% if route == 'user_profile' %}
+                    <div class="active">
+                        <img src="{{ asset('uploads/avatars/' ~ avatarFilename) }}" />
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="{{ path('user_profile') }}">
+                            <img src="{{ asset('uploads/avatars/' ~ avatarFilename) }}" />
+                        </a>
+                    </div>
+                {% endif %}
+                {% if route == 'index' %}
+                    <div class="active">
+                        <img src="{{ asset('assets/img/home-active.svg') }}" />
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="{{ path('index') }}">
+                            <img src="{{ asset('assets/img/home.svg') }}" />
+                        </a>
+                    </div>
+                {% endif %}
+                {% if route == 'getConversations' %}
+                    <div class="active">
+                        <img src="{{ asset('assets/img/conversations-active.svg') }}" />
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="{{ path('getConversations') }}">
+                            <img src="{{ asset('assets/img/conversations.svg') }}" />
+                        </a>
+                    </div>
+                {% endif %}
+            </nav>
+        </header>
+        {% endif %}
     </body>
-    <header>
-        <nav>
-        </nav>
-    </header>
 </html>

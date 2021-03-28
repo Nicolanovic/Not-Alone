@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+<div class="row h1">
+    <h1>Mon Compte</h1>
+</div>
+{{ form_start(form) }}
+
+    <div class="row avatar">
+        {{ form_row(form.avatar) }}
+    </div>
+
+    <div class="row save">
+        <button class="cta-button" type="submit">Sauvegarder</button>
+    </div>
+
+    <div class="row save">
+        <a href="{{ path('app_logout') }}" class="cta-button logout">Se déconnecter</a>
+    </div>
+
+{{ form_end(form) }}
+{% endblock %}

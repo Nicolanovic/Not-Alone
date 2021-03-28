@@ -19,9 +19,6 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-/**
-* @Route("/conversations", name="conversations.")
-*/
 class ConversationController extends AbstractController
 {
 
@@ -48,7 +45,7 @@ class ConversationController extends AbstractController
     }
 
     /**
-     * @Route("/", name="getConversations", methods={"GET"})
+     * @Route("/conversations", name="getConversations", methods={"GET"})
      */
     public function getConvs() {
 
@@ -60,11 +57,97 @@ class ConversationController extends AbstractController
 
         return $this->render('conversation/index.html.twig', [
             'conversations' => $conversationsJson,
+            'avatarFilename' => $this->getUser()->getAvatarFilename()
         ]);
+    }
+
+    /**
+     * @Route("/conversations/new", name="createConversation", methods={"GET"})
+     */
+    public function createConv() {
+
+        $lastUser = $this->userRepository->getLatestUser();
+
+        $k = true;
+        $i = 0;
+
+        while ($k) {
+            $randomId = rand(1, $lastUser->getId());
+
+            $otherUser = $this->userRepository->findOneBy(['id' => $randomId]);
+
+            if ($i == 50) {
+
+                $notice = true;
+
+                return $this->render('index/index.html.twig', [
+                    'avatarFilename' => $this->getUser()->getAvatarFilename(),
+                    'notice' => $notice
+                ]);
+
+            } else {
+                if (is_null($otherUser)) {
+                    $i++;
+                    continue;
+                } else {
+                    if ($otherUser->getId() === $this->getUser()->getId()) {
+                        $i++;
+                        continue;
+                    } else {
+                        $conversation = $this->conversationRepository->findConversationByParticipants(
+                            $otherUser->getId(),
+                            $this->getUser()->getId()
+                        );
+    
+                        if (count($conversation)) {
+                            $i++;
+                            continue;
+                        } else {
+                            $conversation = new Conversation();
+    
+                            $participant = new Participant();
+                            $participant->setUser($this->getUser());
+                            $participant->setConversation($conversation);
+    
+    
+                            $otherParticipant = new Participant();
+                            $otherParticipant->setUser($otherUser);
+                            $otherParticipant->setConversation($conversation);
+
+                            $newMessage = new Message();
+                            $newMessage->setContent("Super ! On vient de matcher ! (ceci est un message automatique)");
+                            $newMessage->setUser($this->getUser());
+                            $newMessage->setConversation($conversation);
+                            $newMessage->setMine(true);
+    
+                            $this->entityManager->getConnection()->beginTransaction();
+                            try {
+                                $this->entityManager->persist($conversation);
+                                $this->entityManager->persist($participant);
+                                $this->entityManager->persist($otherParticipant);
+                                $this->entityManager->persist($newMessage);
+    
+                                $this->entityManager->flush();
+                                $this->entityManager->commit();
+    
+                            } catch (\Exception $e) {
+                                $this->entityManager->rollback();
+                                throw $e;
+                            }
+
+
+                            
+                            return $this->redirectToRoute('showConversation', ['id' => $conversation->getId()]);
+                        }
+                    }
+                }
+            }
+
+        }
     }
     
     /**
-     * @Route("/{id}", name="showConversation", methods={"GET", "POST"})
+     * @Route("conversations/{id}", name="showConversation", methods={"GET", "POST"})
      * @param Request $request
      * @param Conversation $conversation
      */
@@ -92,12 +175,12 @@ class ConversationController extends AbstractController
 
         }
 
-        // On cherche l'autre participant
         $conversations = $this->conversationRepository->findConversationsByUser($this->getUser()->getId());
 
         foreach ($conversations as $_conversation) {
             if ($_conversation["conversationId"] == $conversation->getId()) {
-                $otherParticipant = $_conversation["username"];
+                $otherParticipant["username"] = $_conversation["username"];
+                $otherParticipant["avatarFilename"] = $_conversation["avatarFilename"];
             }
         }
 
@@ -120,7 +203,8 @@ class ConversationController extends AbstractController
         return $this->render('conversation/conversation.html.twig', [
             'messages' => $messagesJson,
             'otherParticipant' => $otherParticipant,
-            'messageForm' => $form->createView()
+            'messageForm' => $form->createView(),
+            'avatarFilename' => $this->getUser()->getAvatarFilename()
         ]);
     }
 

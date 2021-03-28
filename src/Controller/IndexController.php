@@ -13,8 +13,13 @@ class IndexController extends AbstractController
      */
     public function index(): Response
     {
+        $user = $this->getUser();
+        $avatarFilename = $user->getAvatarFilename();
+        $notice=false;
+
         return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
+            'avatarFilename' => $avatarFilename,
+            'notice' => $notice
         ]);
     }
 }

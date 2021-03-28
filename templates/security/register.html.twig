@@ -4,14 +4,25 @@
 
 {% block body %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-    
-    {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+    <div class="form-login">
 
-    <button type="submit">S'inscrire</button>
-    {{ form_end(form) }}
+        <img src="{{ asset('assets/img/logo-not-alone-noir.png') }}" />
+
+        <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+        
+        {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+
+        <button class="cta-button login" type="submit">S'inscrire</button>
+        {{ form_end(form) }}
+
+        <h2>Déjà inscrit ?</h2>
+        <a class="cta-button" href="{{ path('app_login') }}">
+            Se connecter
+        </a>
+
+    </div>
 
 {% endblock %}

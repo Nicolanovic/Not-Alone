@@ -1,5 +1,303 @@
+html {
+    height:100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:black;
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     width:375px;
     height:812px;
     border:1px solid black;
+    position:relative;
+    background-color:white;
+}
+
+header {
+    position:absolute;
+    bottom:0px;
+    height:92px;
+    width:100%;
+    background-color:#FBFBFB;
+    display:flex;
+    align-items: center;
+}
+
+nav {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width:100%;
+}
+
+nav div {
+    width:60px;
+    height:60px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav div img {
+    width:40px;
+    height:40px;
+}
+
+nav div.active {
+    border-radius:50px;
+    background-color:#60D072;
+    box-shadow: 0px 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.main-body {
+    overflow-y:scroll;
+    height:628px;
+}
+
+.main-body.message-body {
+    background-color:#FBFBFB;
+}
+
+.row {
+    height:92px;
+    width:100%;
+    display:flex;
+}
+
+.row.h1 {
+    align-items:center;
+    justify-content:center;
+}
+
+.row.h1.messages {
+    position:relative;
+}
+
+.row.h1.messages img {
+    width:50px;
+    margin-right:15px;
+}
+
+.row.h1.messages a {
+    width:30px;
+    position:absolute;
+    left:20px;
+}
+
+.row.h1.messages a img {
+    width:30px;
+}
+
+h1 {
+    font-size:26px;
+    font-weight:bold;
+}
+
+.row.avatar {
+    background-color:#FBFBFB;
+}
+
+.conversation {
+    align-items:center;
+    color:black;
+    text-decoration:none;
+    font-size:20px;
+    text-transform:capitalize;
+}
+
+.conversation:nth-child(odd) {
+    background-color:#FBFBFB;
+}
+
+.conversation img {
+    width:56px;
+    height:56px;
+    margin-right:10px;
+    margin-left:50px;
+}
+
+.message-container {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:24px 0px;
+}
+
+.message {
+    border-radius: 20px;
+}
+
+.message p {
+    margin:16px;
+}
+
+.message.mine {
+    background: linear-gradient(266.72deg, #F3F3F3 5.24%, #E9E9E9 96.22%);
+    width:325px;
+}
+
+.message.other {
+    background: linear-gradient(102.98deg, #C1FFE1 20.8%, #54FFCC 70.42%);
+    width:250px;
+}
+
+.message-container img {
+    width:50px;
+    height:50px;
+    margin-right:25px;
+}
+
+.message-form {
+    background-color:white;
+    display:flex;
+    align-items:center;
+}
+
+.message-form label {
+    display:none;
+}
+
+.message-form button {
+    width:40px;
+    height:42,5px;
+    padding:0px;
+    border:0px;
+    background-color:white;
+}
+
+.message-form form {
+    display:flex;
+    align-items:center;
+    width:100%;
+    justify-content: space-evenly;
+}
+
+.message-form textarea {
+    width:245px;
+    height:50px;
+}
+
+.row.information {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    height:auto;
+    align-items:center;
+    padding-top:20px;
+    background-color:#FBFBFB;
+}
+
+.row.information p {
+    margin:0px;
+    padding:20px;
+}
+
+.row.information img {
+    width:50px;
+}
+
+.row.cta {
+    display:flex;
+    justify-content:center;
+    height:auto;
+    padding:20px 0px;
+}
+
+.cta-button {
+    background: #FFFFFF;
+    border: 1px solid #238102;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 24px rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    color:#238102;
+    padding:10px 20px;
+    text-decoration:none;
+}
+
+.logout {
+    color:#ff502d;
+    border:1px solid #ff502d;
+    font-size:14px;
+}
+.row.notice {
+    color:white;
+    justify-content: center;
+    align-items:center;
+    background-color:#ff502d;
+    height:auto;
+}
+
+.row.notice p {
+    color:white;
+    justify-content: center;
+    align-items:center;
+    background-color:#ff502d;
+    height:auto;
+    padding:20px;
+    text-align: center;
+    font-weight:bold;
+}
+
+.row.avatar {
+    align-items:center;
+    justify-content: center;
+}
+
+.row.avatar>div {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input#user_profile_avatar {
+    margin-top:10px;
+}
+
+.row.save {
+    height:auto;
+    justify-content: center;
+    padding:20px 0px;
+}
+
+.form-login {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}
+
+.form-login img {
+    width:200px;
+}
+
+.form-login input {
+    border: 2px solid #000000;
+    padding:10px;
+    margin-bottom:20px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cta-button.login {
+    color:black;
+    border:1px solid black;
+    font-size:16px;
+}
+
+.form-login h2 {
+    margin-top:60px;
+}
+
+.form-login form {
+    display:flex;
+    flex-direction: column;
+    align-items:center
+}
+
+.form-login form label {
+    display:none;
 }

@@ -4,6 +4,21 @@
 
 {% block body %}
 
-{{ conversations|json_encode() }}
+<div class="row h1">
+    <h1>Mes Conversations</h1>
+</div>
+
+<div class="main-body">
+    {% for conversation in conversations %}
+
+        <a href="{{ path('showConversation', {'id': conversation.conversationId}) }}" class="row conversation">
+            <img src="{{ asset('uploads/avatars/' ~ conversation.avatarFilename) }}" />
+            {{ conversation.username }}
+        </a>
+
+        {% else %}
+
+    {% endfor %}
+</div>
 
 {% endblock %}

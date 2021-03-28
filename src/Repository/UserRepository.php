@@ -64,4 +64,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    public function getLatestUser() {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('d')
+            ->from('App\Entity\User', 'd')
+            ->orderBy('d.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

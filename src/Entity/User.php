@@ -30,7 +30,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ["ROLE_USER"];
 
     /**
      * @ORM\OneToMany(targetEntity="Participant", mappedBy="user")
@@ -49,7 +49,11 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     */
+    private $avatarFilename = "default.png";
+
+    /**
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -124,6 +128,18 @@ class User implements UserInterface
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    public function getAvatarFilename()
+    {
+        return $this->avatarFilename;
+    }
+
+    public function setAvatarFilename($avatarFilename)
+    {
+        $this->avatarFilename = $avatarFilename;
+
+        return $this;
     }
 
     /**
